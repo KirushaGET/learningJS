@@ -5,16 +5,35 @@ let input = null;
 let container;
 let indexEdit = -1;
 
-window.onload = function init () {
+window.onload = async function init () {
   input = document.getElementById('add-task');
   input.addEventListener('change', updateValue);
+  const responce = await fetch('http://localhost:8000/allTasks', {
+  method: 'GET'
+  });
+  let result = await responce.json(); 
+  allTasks = result.data;
+  render();
 }
 
-onClickButton = () => {
+onClickButton = async () => {
  allTasks.push({
    text: valueInput,
    isCheck: false
  });
+ const responce = await fetch('http://localhost:8000/createTask', {
+  method: 'POST',
+  headers: {
+    'Content-Type':'application/json;charset=utf-8',
+    'Access-Control-Allow-Origin': '*'
+  },
+    body: JSON.stringify({
+      text: valueInput,
+      isCheck: false
+    })
+  });
+  let result = await responce.json(); 
+  allTasks = result.data;
  localStorage.setItem('tasks', JSON.stringify(allTasks));
  valueInput = '';
  input.value = '';
@@ -56,7 +75,7 @@ render = () => {
     let lastIndex = index;
     imageEdit.onclick = function () {
       indexEdit = index;
-       funcEdit(index);
+      funcEdit(index);
     }
     container.appendChild(imageEdit);
 
@@ -73,14 +92,35 @@ render = () => {
   });
 }
 
-onChangeCheckbox = (index) => {
+onChangeCheckbox = async (index) => {
  allTasks[index].isCheck = !allTasks[index].isCheck;
+ const responce = await fetch(`http://localhost:8000/updateTask`, {
+  method: 'PATCH',
+  headers: {
+    'Content-Type':'application/json;charset=utf-8',
+    'Access-Control-Allow-Origin': '*'
+  },
+  body: JSON.stringify({
+    isCheck: allTasks[index].isCheck,
+    text: allTasks[index].text,
+    id: allTasks[index].id
+  })
+  });
  render();
 }
 
-funcdelete = (index) => {
+funcdelete = async (index) => {
+  const responce = await fetch(`http://localhost:8000/deleteTask?id=${allTasks[index].id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type':'application/json;charset=utf-8',
+      'Access-Control-Allow-Origin': '*'
+    },
+    });
+
   allTasks.splice(index,1);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
+
   render();
 }
 
@@ -97,11 +137,22 @@ funcEdit = (index) => {
   editInput.value = allTasks[index].text;
   editInput.addEventListener('change', editSave);
 
-  imageDone.onclick = function () {
+  imageDone.onclick = async function () {
   editInput.value = '';
+  const responce = await fetch(`http://localhost:8000/updateTask`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type':'application/json;charset=utf-8',
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify({
+      id: allTasks[index].id,
+      text: allTasks[index].text
+    })
+    });
   render();
   }
-  
+
 
 }
 editSave = (event) => {
