@@ -1,13 +1,111 @@
-.task-container {
-    display: flex;
+
+.all{
+    background-color:rgb(0, 0, 0,0.7);
+    padding-bottom: 90%;
+    padding-left: 30px;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    font-size: 18pt;
+    color:ivory;
+
+}
+
+h1 {
+    font-style: italic;
+}
+#add-where {
+    border:1px solid gray; 
+    border-radius: 3px;
+}
+
+#where {
+width: 300px;
+font-size: 14pt;
+}
+
+#add-how{
+    border:1px solid gray; 
+    border-radius: 3px;
+    width: 200px;
+}
+
+#how {
+    width: 300px;
+    font-size: 14pt;
+    margin-left: 10px;
+}
+
+button {
+
+    background-color: green;
+    outline: none;
+    border: 0;
+    margin-top:40px;
+    height:40px;
+    font-size: 18pt;
+    border-radius: 3px;
+    padding:5px;
+
+}
+#inp {
+    display: flex;
+   align-items: flex-end;
+}
+input {
+    height:40px;
+}
+
+.sum {
+    margin-left: auto;
+    margin-right: 100px;
+    display:flex;
+
+}
+body {
+    background-image: url(https://planetofhotels.com/guide/sites/default/files/styles/paragraph__text_with_image___twi_image/public/2020-05/big-ben-1.jpg);
+    background-size: cover;
+}
+
+.task-container{
+display: flex;
+font-size: 20pt;
+align-items: center;
+}
+
+.image {
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+
+}
+
+.done-text {
+    text-decoration: line-through;
+    width:500px;
+    word-wrap:break-word;
 }
 
 .text-task {
-    font-size:18px;
-    margin-left:8px;
+    width:500px;
+    word-wrap:break-word;
 }
-.done-text {
-    color: rgba(0,0,0,0.3);
-    text-decoration: line-through;
+
+#sumValue {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.SumWindow {
+    width:100px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.numb {
+    font-size: 18pt;
 }

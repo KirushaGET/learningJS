@@ -25,6 +25,8 @@ const taskScheme = new Schema ({
 const uri = "mongodb+srv://kgarnov:kgarnov@todoclaster.gad3l.mongodb.net/ToDo?retryWrites=true&w=majority";
 mongoose.connect(uri, {useNewUrlParser: true,useUnifiedTopology: true});
 */
+
+
 window.onload = function init () {
   input = document.getElementById('add-where');
   input.addEventListener('change', updateValue);
@@ -35,19 +37,20 @@ window.onload = function init () {
   });
   let result = await responce.json(); 
   allTasks = result.data;*/
+  
   render();
 }
 
 onClickButton = async () => {
- allTasks.push({
-   text: valueInput,
-   isCheck: false
- });
  if(valueInputHow <=0) alert("Зачем записывать??? Только расходы");
+ else if (!(+(valueInputHow))) alert("Введите корректное значение");
  else {
+  allTasks.push({
+    text: valueInput,
+    isCheck: false
+  });
  counter.push(valueInputHow);
- console.log(counter);
- sum+=valueInputHow;
+ sum+=+(valueInputHow);
  /*const responce = await fetch('http://localhost:8000/createTask', {
   method: 'POST',
   headers: {
@@ -66,6 +69,9 @@ onClickButton = async () => {
  input.value = '';
  valueInputHow = '';
  inputHow.value = '';
+ const SumWin = document.getElementById('sumValue');
+ SumWin.textContent=sum;
+
  render();
 }
 }
@@ -80,13 +86,13 @@ updateValue = (event) => {
 updateValueHow = (event) => {
   valueInputHow = event.target.value;
   if (indexEdit >= 0) {
-    counter[indexEdit].text = event.target.value;
+    counter[indexEdit].text = +(event.target.value);
   }
 }
 
 render = () => {
   const content = document.getElementById('content-page');
-  
+
   while(content.firstChild) {
     content.removeChild(content.firstChild);
   }
@@ -94,19 +100,38 @@ render = () => {
     container = document.createElement('div');
     container.id = `task-${index}`;
     container.className = 'task-container';
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.className = "image";
-    checkbox.checked = item.isCheck;
-    checkbox.onchange = function () {
-      onChangeCheckbox(index);
-    };
-    container.appendChild(checkbox);
+    const num = document.createElement('pre');
+    num.className = "numb";
+    num.innerText = `${index+1}) `;
+    container.appendChild(num); 
 
-    const text = document.createElement('p');
-    text.innerText = item.text;
-    text.className = item.isCheck ? 'done-text' : 'text-task ';
-    container.appendChild(text);
+    if(indexEdit === index) {
+      const text = document.createElement('input');
+      text.value = allTasks[index].text;
+      text.addEventListener('change', editText);
+      container.appendChild(text);
+
+      const imageDone = document.createElement('img');
+      imageDone.src = 'done.png';
+      imageDone.className = "image";
+      container.appendChild(imageDone); 
+
+      imageDone.onclick = async function () {
+      indexEdit =-1;
+      render();
+    }
+    }
+    else {
+      const text2 = document.createElement('p');
+      text2.innerText = item.text;
+      text2.className = item.isCheck ? 'done-text' : 'text-task ';
+      container.appendChild(text2);
+    }
+
+    const SumWindow = document.createElement('p');
+    SumWindow.innerText = counter[index];
+    SumWindow.className = 'SumWindow';
+    container.appendChild(SumWindow);
 
     const imageEdit = document.createElement('img');
     imageEdit.src = 'edit.png';
@@ -114,7 +139,7 @@ render = () => {
     let lastIndex = index;
     imageEdit.onclick = function () {
       indexEdit = index;
-      funcEdit(index);
+      render();
     }
     container.appendChild(imageEdit);
 
@@ -130,6 +155,10 @@ render = () => {
     content.appendChild(container);
 
   });
+}
+
+editText = (e) => {
+  allTasks[indexEdit].text = e.target.value;
 }
 
 onChangeCheckbox = async (index) => {
@@ -157,31 +186,16 @@ funcdelete = async (index) => {
       'Access-Control-Allow-Origin': '*'
     },
     });
-
-  allTasks.splice(index,1);*/
- // localStorage.setItem('tasks', JSON.stringify(allTasks));
-
+*/
+  sum -= counter[index];
+  allTasks.splice(index,1);
+  counter.splice(index,1);
+  const SumWin = document.getElementById('sumValue');
+  SumWin.textContent=sum;
+  // localStorage.setItem('tasks', JSON.stringify(allTasks));
   render();
 }
 
-funcEdit = (index) => {
-  //flagEdit = true;
-  const editInput = document.createElement('input');
-  editInput.type = 'text';
-  indexEdit = index;
-
-  container = document.getElementById(`task-${index}`);
-  const imageDone = document.createElement('img');
-  console.log(container);
-  imageDone.src = 'done.png';
-  imageDone.className = "image";
-  container.appendChild(imageDone); 
-  container.appendChild(editInput);
-  editInput.value = allTasks[index].text;
-  editInput.addEventListener('change', editSave);
-
-  imageDone.onclick = async function () {
-  editInput.value = '';
   /*const responce = await fetch(`http://localhost:8000/updateTask`, {
     method: 'PATCH',
     headers: {
@@ -193,18 +207,6 @@ funcEdit = (index) => {
       text: allTasks[index].text
     })
     });*/
-  render();
-  }
 
+  
 
-}
-editSave = (event) => {
-  allTasks[indexEdit].text = event.target.value;
-  indexEdit = -1;
-}
-
-deleteStorage = () => {
-allTasks=[];
-//localStorage.clear();
-render();
-}
