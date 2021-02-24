@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Расходы</title>
+    <link rel = "stylesheet" type = "text/css" href = "style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="all">
+      <h1>Учет моих расходов</h1>
+      <div id="inp">
+        <div id="where">
+          <p>Куда было потрачено:</p>        
+            <input type='text' id='add-where' placeholder="Куда было потрачено">
+        </div>
+        <div id="how">
+          <p>Сколько было потрачено:</p>   
+          <input type='text' id='add-how' placeholder="Сколько было потрачено">
+        </div>
+        <button onclick="onClickButton()">Добавить</button>
+      </div>
+      <div class="sum"><p>Итого:</p><p id='sumValue'>0</p><p>р.</p></div>
+      <div id="content-page"></div>
+      <p id="niz"></p>
+    </div>
+  </body>
+</html>
