@@ -1,7 +1,5 @@
-
 .all{
     background-color:rgb(0, 0, 0,0.7);
-    padding-bottom: 90%;
     padding-left: 30px;
     align-items: center;
     display: flex;
@@ -11,6 +9,32 @@
     margin: 0 auto;
     font-size: 18pt;
     color:ivory;
+    position: fixed;
+    top: 0;
+    margin-left: 20%;
+    width: 100%;
+    height: 100%;
+
+}
+
+.bot {
+    margin-top: -35%;
+    position: fixed;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+#niz {
+    margin-top: 82%;
+}
+#content-page {
+    padding-right: 50px;
+    overflow-y:auto;
+    height: 550px;
+    position: fixed;
+    margin-top: 13%;
 }
 
 h1 {
@@ -19,23 +43,26 @@ h1 {
 #add-where {
     border:1px solid gray; 
     border-radius: 3px;
+    width: 300px;
 }
 
 #where {
-width: 300px;
-font-size: 14pt;
+    margin-left: -60px;
+    width: 300px;
+    font-size: 18pt;
 }
 
 #add-how{
     border:1px solid gray; 
     border-radius: 3px;
-    width: 200px;
+    width: 255px;
 }
 
 #how {
     width: 300px;
-    font-size: 14pt;
+    font-size: 18pt;
     margin-left: 10px;
+    padding-left: 200px;
 }
 
 button {
@@ -50,19 +77,21 @@ button {
     padding:5px;
 
 }
+
 #inp {
     display: flex;
-   align-items: flex-end;
+    align-items: flex-end;
 }
+
 input {
-    height:40px;
+    height:35px;
 }
 
 .sum {
     margin-left: auto;
-    margin-right: 100px;
+    margin-right: 23%;
     display:flex;
-
+    
 }
 body {
     background-image: url(https://planetofhotels.com/guide/sites/default/files/styles/paragraph__text_with_image___twi_image/public/2020-05/big-ben-1.jpg);
@@ -70,16 +99,15 @@ body {
 }
 
 .task-container{
-display: flex;
-font-size: 20pt;
-align-items: center;
+    display: flex;
+    font-size: 20pt;
+    align-items: center;
 }
 
 .image {
     height: 20px;
     width: 20px;
     padding-left: 20px;
-
 }
 
 
@@ -104,23 +132,38 @@ align-items: center;
     font-size: 18pt;
 }
 
-#content-page {
-    padding-right: 50px;
-    overflow-y:auto;
-    height: 550px;
-}
-
 .inputTextik {
-    width: 620px;
+    width:455px;
     height:40px;
     border:1px solid gray; 
     border-radius: 10px;
+    font-size: 20pt;
 }
 
 .inputTextik2 {
-    width: 200px;
+    width: 280px;
     margin-left: 20px;
     height:40px;
     border:1px solid gray; 
     border-radius: 10px;
+    font-size: 20pt;
+}
+
+.inputAll {
+    width: 395px;
+    border:1px solid gray; 
+    border-radius: 10px;
+    font-size: 20pt;
+}
+.inputAll1 {
+    font-size: 20pt;
+    width: 380px;
+    border:1px solid gray; 
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+::placeholder {
+    font-size: 16pt;
+
 }
