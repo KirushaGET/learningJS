@@ -8,8 +8,8 @@ let sum = 0;
 let flagEdit = false;
 let editTextTemp = "";
 let editNumTemp;
-let flagEditHow=0;
-let flagEditText=0;
+let flagEditHow = 0;
+let flagEditText = 0;
 
 
 
@@ -27,13 +27,13 @@ window.onload = async function init () {
     sum += +(item.how);
   });
   const SumWin = document.getElementById('sumValue');
-  SumWin.textContent=sum;
+  SumWin.textContent = sum;
   render();
 }
 
 onClickButton = async () => {
- if(valueInput === '' && valueInputHow <=0) alert("Введите два корректные значения");
- else if(valueInputHow <=0) alert("Расходы не могут быть отрицательными");
+ if(valueInput === '' && valueInputHow <= 0) alert("Введите два корректные значения");
+ else if(valueInputHow <= 0) alert("Расходы не могут быть отрицательными");
  else if(valueInput === '') alert("Введите название магазина");
  else if (!(+(valueInputHow))) alert("Введите корректное значение");
  else {
@@ -57,7 +57,7 @@ onClickButton = async () => {
  valueInputHow = '';
  inputHow.value = '';
  const SumWin = document.getElementById('sumValue');
- SumWin.textContent=sum;
+ SumWin.textContent = sum;
 
  render();
 }
@@ -83,7 +83,7 @@ render = async () => {
   while(content.firstChild) {
     content.removeChild(content.firstChild);
   }
-  allTasks.map((item,index) => {
+  allTasks.map((item, index) => {
     container = document.createElement('div');
     container.id = `task-${index}`;
     container.className = 'task-container';
@@ -128,7 +128,7 @@ render = async () => {
       {
         const text2 = document.createElement('p');
         text2.innerText = item.text;
-        text2.className = 'text-task ';
+        text2.className = 'text-task';
         container.appendChild(text2);
 
         const text3 = document.createElement('input');
@@ -143,10 +143,10 @@ render = async () => {
       flagEditText = 0;
 
       const ere = document.getElementById('niz');
-      ere.innerText='Дважды нажмите здесь чтобы сохранить';
+      ere.innerText = 'Дважды нажмите здесь чтобы сохранить';
       ere.ondblclick = function() {
         funcSave(index);
-        indexEdit =-1;
+        indexEdit = -1;
         render();
       }
 
@@ -162,8 +162,8 @@ render = async () => {
       container.appendChild(imageDelete);
 
       imageDelete.onclick = function () {
-        indexEdit =-1;
-        ere.innerText ='';
+        indexEdit = -1;
+        ere.innerText = '';
         render();
       }
 
@@ -175,7 +175,7 @@ render = async () => {
     else {
       const text2 = document.createElement('p');
       text2.innerText = item.text;
-      text2.className = 'text-task ';
+      text2.className = 'text-task';
       container.appendChild(text2);
 
       text2.ondblclick = function () {
@@ -243,7 +243,7 @@ funcdelete = async (index) => {
   SumWin.textContent=sum;
   const responce = await fetch(`http://localhost:8000/deleteTask?_id=${allTasks[index]._id}`, {
     method: 'DELETE'
-    });
+  });
   const responce2 = await fetch('http://localhost:8000/allTasks', {
     method: 'GET'
   });
@@ -259,7 +259,7 @@ funcdelete = async (index) => {
       allTasks[index].how = +(editNumTemp);
       sum+=allTasks[index].how;
       const SumWin = document.getElementById('sumValue');
-      SumWin.textContent=sum;
+      SumWin.textContent = sum;
       }
       //с текстом
       if(editTextTemp) allTasks[indexEdit].text = editTextTemp;
@@ -277,7 +277,7 @@ funcdelete = async (index) => {
       });
       editNumTemp = NaN;
       editTextTemp = "";
-      indexEdit =-1;
+      indexEdit = -1;
       const ere = document.getElementById('niz');
       ere.innerText = "";
 
